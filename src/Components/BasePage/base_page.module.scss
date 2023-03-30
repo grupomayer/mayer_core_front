@@ -1,0 +1,30 @@
+@import "Styles/_variables.scss";
+
+.content {
+    display: flex;
+    min-height: 110vh;
+    &__outlet {
+        border-radius: 20px;
+        background-color: $light-color;
+        margin: 20px;
+        margin-top: $margin-top-base;
+        margin-bottom: $margin-bottom-base;
+        padding: 20px;
+        width: calc(100% - 40px);
+        max-width: calc(100% - 40px);
+        box-shadow: 1px 1px 5px $shadow-color;
+    }
+}
+
+@media only screen and (max-width: $break-lg) {
+    .content {
+        &__outlet {
+            margin: 0px;
+            margin-top: $margin-top-base;
+            margin-bottom: $margin-bottom-base;
+            padding: 20px 0px;
+            width: 100%;
+            max-width: 100%;
+        }
+    }
+}

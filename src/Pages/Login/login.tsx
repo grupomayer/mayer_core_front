@@ -4,15 +4,28 @@ import { FormEvent, useState } from "react";
 import styles from "./login.module.scss";
 import user from "./src/user.png";
 import { Link } from "react-router-dom";
+import { PostAuthenticationData } from "./utils/classes";
+import { postAuthenticationRequisition } from "./utils/requisitions";
+import { useDispatch } from "react-redux";
 
 function Login() {
 
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<number | null>(null);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   function onFormSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    alert("vamo");
+    const postAuthenticationData = new PostAuthenticationData(
+      dispatch,
+      email,
+      password,
+      setLoading,
+      setError
+    );
+    postAuthenticationRequisition(postAuthenticationData);
   }
 
   return (

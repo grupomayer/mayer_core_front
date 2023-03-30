@@ -1,0 +1,25 @@
+@import "Styles/_variables.scss";
+
+@mixin create-shadow($w, $h, $e) {
+    box-shadow: $w $h $e $shadow-color;
+}
+
+.header {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    padding: 20px;
+    background-color: $light-color;   
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    transition: 0.2s;
+    z-index: 100;
+    @include create-shadow(0px, 2px, 6px);
+    &:hover, &:focus {
+        @include create-shadow(0px, 4px, 8px);
+    }
+    .mayer {
+        height: 100px;
+    }
+}

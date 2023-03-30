@@ -1,0 +1,51 @@
+@import "Styles/_variables.scss";
+
+.bg {
+    background-color: #5e5e5e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    height: 80vh;
+    margin-top: 40px;
+    .content {
+        $size: 300px;
+        width: $size;
+        background-color: transparent;
+        .img {
+            position: relative;
+            top: 80px;
+            left: 25%;
+            img {
+                width: 150px;
+            }
+        }
+        .form {
+            .title {
+                text-align: center;
+                font-size: 24px;
+            }
+            height: 310px;
+            border-radius: 30px;
+            padding: 20px;
+            background-color: whitesmoke;
+            box-shadow: 5px 5px 5px #0000003d;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+        .down {
+            display: flex;
+            justify-content: center;
+            .link {
+                
+                background-color: whitesmoke;
+                padding: 15px;
+                border-bottom-left-radius: 20px;
+                border-bottom-right-radius: 20px;
+                box-shadow: inset 0px 5px 3px #0000003d;
+            }
+        }
+    }
+}

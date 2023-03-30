@@ -1,0 +1,87 @@
+@import "Styles/_variables.scss";
+
+.holder {
+    margin: 10px 10px 10px 0px;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &__label {
+        margin-bottom: 5px;
+        margin-left: 5px;
+        font-size: 14px;
+        &::after {
+            content: ":";
+        }
+    }
+
+    &__input[type=text] {
+        width: calc(100% - 20px);
+    }
+
+    &__input[type=checkbox] {
+        $checkbox-size: 25px;
+        width: $checkbox-size;
+        height: $checkbox-size;
+        margin-left: 15px;
+        &:hover, &:focus {
+            background: linear-gradient(to bottom, white 50%, #d1d1d1);
+            cursor: pointer;
+            outline: none;
+        }
+    }
+
+    .textarea {
+        $size: calc(100% - 20px);
+        height: 80px;
+        min-height: 80px;
+        max-height: 80px;
+        width: $size;
+        min-width: $size;
+        max-width: $size;
+    }
+    
+    &__input {
+        margin: 0px;
+        font-size: 14px;
+        padding: 10px 10px;
+        border: 1px solid gray;
+        border-radius: 5px;
+        background: linear-gradient(to bottom, white 80%, #dbdbdb);
+
+        &::placeholder {
+            padding: 15px;
+            font-size: 12px;
+        }
+
+        &:hover, &:focus {
+            background: linear-gradient(to bottom, white 50%, #d1d1d1);
+            outline: 1px solid $primary-color;
+        }
+
+        &:disabled {
+            box-shadow: inset 0px 0px 10px $shadow-color;
+            background: #cccccc;
+            color: black;
+            &::placeholder {
+                color: black;
+            }
+            &:hover {
+                cursor: not-allowed;
+            }
+        }
+        &--z {
+            &:disabled {
+                z-index: -1;
+            }
+        }
+        &__select {
+            &:hover {
+                cursor: pointer !important;
+            }
+        }
+    }
+}

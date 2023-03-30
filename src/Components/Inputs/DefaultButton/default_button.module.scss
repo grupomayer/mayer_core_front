@@ -1,0 +1,49 @@
+@import "Styles/_variables.scss";
+
+@mixin disabled-button {
+    &:disabled {
+        background: gray !important;
+        &:hover {
+            cursor: not-allowed;
+            letter-spacing: 0px;
+        }
+    }
+}
+
+.holder {
+    margin: 10px 10px 10px 0px;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    &__button {
+        padding: 10px;
+        width: 100%;
+        cursor: pointer;
+        border-radius: 5px;
+        border: 1px solid gray;
+        color: $button-color-contrast;
+        background: linear-gradient(to bottom, white 80%, #dbdbdb);
+        @include disabled-button();
+        &--red {
+            border: none;
+            color: white;
+            font-size: 14px;
+            text-transform: uppercase;
+            background-color: $primary-color;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.2s;
+            &:hover, &:focus {
+                background-color: $ligther-primary-color;
+                letter-spacing: 3px;
+            }
+            @include disabled-button();
+        }
+        &:hover, &:focus {
+            background: linear-gradient(to bottom, white 50%, #d1d1d1);
+            outline: 1px solid $primary-color;
+        }
+    }
+}

@@ -3,11 +3,19 @@ import { SideMenuButton } from "./utils/classes";
 import SideMenuButtonComponent from "./SideMenuButton/side_menu_button";
 import { useState } from "react";
 import classNames from "classnames";
+import { SelectDataClass } from "Utils/classes";
+import logo from "./src/logo_mayer.png"
+import userIcon from "./src/user.png"
 
 function SideMenu() {
 
   const [openMenu, setOpenMenu] = useState<boolean>(true);
-  const [options, setOptions] = useState<Array<SideMenuButton>>([]);
+  const [options, setOptions] = useState<Array<SideMenuButton>>([
+    new SideMenuButton("Usuários", [
+      new SelectDataClass("users", "Buscar usuários"),
+      new SelectDataClass("register_user", "Cadastrar usuário"),
+    ], userIcon, true)
+  ]);
 
   function changeTab(button: SideMenuButton) {
     setOptions(options.map(option => {
@@ -22,6 +30,21 @@ function SideMenu() {
       [styles.menu]: true,
       [styles["menu--closed"]]: !openMenu
     })}>
+      <div className={styles.center}>
+        <button
+          className={styles.menu__button}
+          onClick={() => setOpenMenu(!openMenu)}
+        >=</button>
+      </div>
+      {openMenu && (
+        <figure className={styles.center}>
+          <img
+            alt="Logo do Grupo Mayer"
+            src={logo}
+            className={styles.mayer}
+          />
+        </figure>
+      )}
       {openMenu && (<>
         {options.map(button => (
           <SideMenuButtonComponent
@@ -31,22 +54,11 @@ function SideMenu() {
           />
         ))}
       </>)}
-      <button
-        className={styles.menu__button}
-        onClick={() => setOpenMenu(!openMenu)}
-      >
-        {openMenu ? (
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-left" viewBox="0 0 16 16">
-            <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
-          </svg>
-        ) : (
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-right" viewBox="0 0 16 16">
-            <path fillRule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
-          </svg>
-        )}
-      </button>
     </section>
-    {openMenu && <div className={styles.out} />}
+    <div className={classNames({
+      [styles.out]: openMenu,
+      [styles["out-small"]]: !openMenu
+    })} />
   </>)
 }
 

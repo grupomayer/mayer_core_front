@@ -3,16 +3,15 @@
 .content {
     display: flex;
     min-height: 110vh;
+    background-color: #dddddd;
     &__outlet {
-        border-radius: 20px;
-        background-color: $light-color;
+        border-radius: 10px;
         margin: 20px;
         margin-top: $margin-top-base;
         margin-bottom: $margin-bottom-base;
         padding: 20px;
         width: calc(100% - 40px);
         max-width: calc(100% - 40px);
-        box-shadow: 1px 1px 5px $shadow-color;
     }
 }
 

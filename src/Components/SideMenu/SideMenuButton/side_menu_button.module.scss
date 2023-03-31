@@ -1,34 +1,27 @@
 @import "Styles/_variables.scss";
 
 .button {
-    background-color: $button-color;
+    background-color: $side-menu-color;
     color: $button-text-color;
-    height: 66px;
+    height: 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 5px 10px;
+    border-radius: 10px;
     &--selected {
-        background: linear-gradient(180deg, $button-selected-color 50%, $button-color);
-        border-top: 1px solid $button-border-color;
-        border-bottom: 1px solid $button-color-contrast;
-        &::after {
-            position: absolute;
-            right: 0;
-            height: 66px;
-            width: 5px;
-            background-color: $primary-color;
-            content: "";
-        }
+        background-color: $side-menu-button-color;
     }
     &__info {
         display: flex;
         align-items: center;
         padding-left: 20px;
         .img {
-            width: 20px;
+            width: 15px;
         }
         .option {
             margin-left: 10px;
+            font-size: 14px;
         }
     }
     &__img {
@@ -41,28 +34,25 @@
 
 .options {
     &__option {
-        padding: 0px 30px;
+        padding: 0px 20px;
         display: flex;
         align-items: center;
         color: white;
-        font-size: 14px;
+        font-size: 12px;
+        border-radius: 10px;
+        margin: 5px 20px;
         &:hover, &:focus {
             cursor: pointer;
-            background-color: $button-selected-color;
-        }
-        &::after {
-            position: absolute;
-            right: 0;
-            height: 36px;
-            width: 5px;
-            background-color: $primary-color;
-            content: "";
+            background-color: $side-menu-button-color;
         }
         &--selected {
-            background-color: $button-selected-color !important;
+            background-color: $side-menu-button-color !important;
         }
         &__img {
             margin-right: 10px;
+            img {
+                height: 100%;
+            }
         }
     }
 }

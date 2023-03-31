@@ -1,0 +1,76 @@
+@import "Styles/_variables.scss";
+
+.user-selected {
+    background-color: $primary-color;
+    color: white;
+}
+
+.user-selected > .data > a {
+    color: white;
+}
+
+.data {
+    cursor: pointer;
+    padding: 20px;
+    text-align: start;
+}
+
+.lines:hover, .lines:focus {
+    background-color: $primary-color;
+    color: white;
+}
+
+.lines:hover > .data > a {
+    color: white;
+}
+
+.lines:focus > .data > a {
+    color: white;
+}
+
+a:hover, a:focus {
+    color: #d6d6d6 !important;
+}
+
+.infos-user-box {
+    transition: 0.2s;
+    width: calc(100%);
+    z-index: 80;
+    height: 200px;
+    background-color: $primary-color;
+    animation-name: open-info-menu;
+    animation-duration: 0.2s;
+    overflow-y: scroll;
+}
+
+@keyframes open-info-menu {
+    from {
+        height: 0px;
+    }
+    to {
+        height: 200px;
+    }
+}
+
+.anycontent {
+    padding: 10px;
+}
+
+.view-button {
+    border: none;
+    $button-size: 35px;
+    width: $button-size;
+    height: $button-size;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    color: #1360b9;
+    transition: 0.2s;
+    &:hover {
+        width: calc($button-size + 5px);
+        height: calc($button-size + 5px);
+        box-shadow: 1px 1px 3px $shadow-color;
+        cursor: pointer;
+    }
+}

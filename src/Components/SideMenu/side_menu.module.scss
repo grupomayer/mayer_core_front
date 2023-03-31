@@ -1,20 +1,28 @@
 @import "Styles/_variables.scss";
 
 .out {
-    width: 300px;
+    width: 230px;
+}
+
+.out-small {
+    width: 75px;
 }
 
 .menu {
-    background-color: $dark-color;
-    width: 250px;
+
+    background-color: $side-menu-color;
+    width: 190px;
+    animation: open 1;
     height: 110vh;
-    top: 155px;
     position: fixed;
+    z-index: 99;
+
     &--closed {
-        width: 0px;
+        animation: close 1;
+        width: 65px;
     }
+
     &__button {
-        position: absolute;
         top: 60px;
         display: flex;
         align-items: center;
@@ -22,14 +30,24 @@
         border: none;
         cursor: pointer;
         color: $light-color;
-        background-color: $primary-color;
-        $button-size: 35px;
+        background-color: $side-menu-color;
+        $button-size: 30px;
         height: $button-size;
         right: -$button-size;
         width: $button-size;
         border-top-right-radius: calc($button-size / 2);
         border-bottom-right-radius: calc($button-size / 2);
     }
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0px;
+}
+
+.mayer {
+    height: 100px;
 }
 
 @media only screen and (max-width: $break-sm) {

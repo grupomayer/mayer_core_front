@@ -1,0 +1,56 @@
+@import "Styles/_variables.scss";
+
+.table {
+    width: 100%;
+    margin-top: 15px;
+    width: 100%;
+
+    overflow: hidden;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.titles {
+    background-color: $side-menu-color;
+    border: 1px solid $side-menu-color;
+    color: $light-color;
+    padding-top: 5px;
+    .options {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        .order {
+            border: none;
+            background-color: transparent;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            .carret {
+                cursor: pointer;
+                width: 20px;
+            }
+        }
+    }
+}
+
+.container {
+    overflow-x: scroll;
+    width: 100%;
+}
+
+.head {
+    background-color: white;
+    width: 100%;
+}
+
+.body {
+    background-color: white;
+    width: 100%;
+}
+
+.aside {
+    min-height: 200px;
+    max-height: 350px;
+    overflow-y: scroll;
+}

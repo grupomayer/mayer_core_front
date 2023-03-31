@@ -1,0 +1,56 @@
+name: Mayer Core Front
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '18.x'
+
+    - name: Install dependencies
+      run: npm install 
+
+    - name: Build the app
+      run: CI=false npm run build
+
+
+    - name: SonarCloud Scan
+      uses: sonarsource/sonarcloud-github-action@master  
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  
+
+    - name: SonarQube Quality Gate check
+      id: sonarqube-quality-gate-check
+      uses: sonarsource/sonarqube-quality-gate-action@master
+      timeout-minutes: 5
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+    - name: Merge pull request
+      if: steps.sonarqube-quality-gate-check.outputs.status == 'PASSED'
+      uses: actions/github-script@v3
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+            const pullRequestNumber = context.payload.pull_request.number;
+            const repoToken = core.getInput('REPO_TOKEN');
+            const octokit = new github.GitHub(repoToken);
+            octokit.pulls.merge({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: pullRequestNumber
+            });

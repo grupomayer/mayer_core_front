@@ -1,0 +1,39 @@
+@import "Styles/_variables.scss";
+
+.out {
+    width: 300px;
+}
+
+.menu {
+    background-color: $dark-color;
+    width: 250px;
+    height: 110vh;
+    top: 155px;
+    position: fixed;
+    &--closed {
+        width: 0px;
+    }
+    &__button {
+        position: absolute;
+        top: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        cursor: pointer;
+        color: $light-color;
+        background-color: $primary-color;
+        $button-size: 35px;
+        height: $button-size;
+        right: -$button-size;
+        width: $button-size;
+        border-top-right-radius: calc($button-size / 2);
+        border-bottom-right-radius: calc($button-size / 2);
+    }
+}
+
+@media only screen and (max-width: $break-sm) {
+    .menu {
+        top: 122px;
+    }
+}

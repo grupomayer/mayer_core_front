@@ -43,14 +43,21 @@
         min-width: $size;
         max-width: $size;
     }
-    
+    &__holder {
+        display: flex;
+    }
+    &__cube {
+        width: 50px;
+        background-color: $primary-color;
+        height: 40px;
+    }
     &__input {
         margin: 0px;
         font-size: 14px;
         padding: 10px 10px;
-        border: 1px solid gray;
-        border-radius: 5px;
-        background: linear-gradient(to bottom, white 80%, #dbdbdb);
+        border: none;
+        border-bottom: 1px solid gray;
+        width: 100%;
 
         &::placeholder {
             padding: 15px;
@@ -58,8 +65,8 @@
         }
 
         &:hover, &:focus {
-            background: linear-gradient(to bottom, white 50%, #d1d1d1);
-            outline: 1px solid $primary-color;
+            outline: 1px solid gray;
+            border: none;
         }
 
         &:disabled {

@@ -1,0 +1,68 @@
+@import "Styles/_variables.scss";
+
+.button {
+    background-color: $button-color;
+    color: $button-text-color;
+    height: 66px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &--selected {
+        background: linear-gradient(180deg, $button-selected-color 50%, $button-color);
+        border-top: 1px solid $button-border-color;
+        border-bottom: 1px solid $button-color-contrast;
+        &::after {
+            position: absolute;
+            right: 0;
+            height: 66px;
+            width: 5px;
+            background-color: $primary-color;
+            content: "";
+        }
+    }
+    &__info {
+        display: flex;
+        align-items: center;
+        padding-left: 20px;
+        .img {
+            width: 20px;
+        }
+        .option {
+            margin-left: 10px;
+        }
+    }
+    &__img {
+        padding-right: 20px;
+    }
+    &:hover, &:focus {
+        cursor: pointer;
+    }
+}
+
+.options {
+    &__option {
+        padding: 0px 30px;
+        display: flex;
+        align-items: center;
+        color: white;
+        font-size: 14px;
+        &:hover, &:focus {
+            cursor: pointer;
+            background-color: $button-selected-color;
+        }
+        &::after {
+            position: absolute;
+            right: 0;
+            height: 36px;
+            width: 5px;
+            background-color: $primary-color;
+            content: "";
+        }
+        &--selected {
+            background-color: $button-selected-color !important;
+        }
+        &__img {
+            margin-right: 10px;
+        }
+    }
+}

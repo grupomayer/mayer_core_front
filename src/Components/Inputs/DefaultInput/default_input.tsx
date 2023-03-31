@@ -38,22 +38,25 @@ function DefaultInput({ id, className, onFocus, type, placeholder, title, label,
         {label}
       </label>
       {type !== "textarea" && type !== "select" && type !== "checkbox" && type !== "file" && (
-        <input
-          id={id}
-          className={getDefaultClassNames()}
-          placeholder={placeholder}
-          type={type}
-          title={title}
-          min={min}
-          max={max}
-          minLength={min}
-          maxLength={max}
-          required={required}
-          value={value}
-          disabled={disabled}
-          onFocus={onFocus}
-          onChange={e => onChange ? onChange(e.target.value) : undefined}
-        />
+        <div className={styles.holder__holder}>
+          <div className={styles.holder__cube} />
+          <input
+            id={id}
+            className={getDefaultClassNames()}
+            placeholder={placeholder}
+            type={type}
+            title={title}
+            min={min}
+            max={max}
+            minLength={min}
+            maxLength={max}
+            required={required}
+            value={value}
+            disabled={disabled}
+            onFocus={onFocus}
+            onChange={e => onChange ? onChange(e.target.value) : undefined}
+          />
+        </div>
       )}
       {type === "file" && (
         <input

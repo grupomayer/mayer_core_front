@@ -1,6 +1,11 @@
 import { SelectDataType } from "Interfaces/SelectDataType";
 import { SelectDataClass } from "./classes";
 
+export const branchs: Array<SelectDataType> = [
+    new SelectDataClass("Matriz", "Matriz"),
+    new SelectDataClass("Filial SP", "Filial SP")
+];
+
 export const departments: Array<SelectDataType> = [
     new SelectDataClass("Diretoria", "Diretoria"),
     new SelectDataClass("Registrário", "Registrário"),

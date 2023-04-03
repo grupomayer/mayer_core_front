@@ -8,6 +8,10 @@ import { FormEvent, useState } from "react";
 import { branchs, departments } from "Utils/datas";
 import userImg from "Images/user.png";
 import ShowUserPermissions from "./Components/ShowUserPermissions/show_user_permissions";
+import { PutUserData } from "./utils/classes";
+import { useAppDispatch } from "Hooks/useRedux/use_redux";
+import { putUserRequisition } from "./utils/requisitions";
+import ShowConfirmUserDelete from "./Components/ShowConfirmUserDelete/show_confirm_user_delete";
 
 interface IShowUserData {
   onClose: Function,
@@ -15,6 +19,9 @@ interface IShowUserData {
 }
 function ShowUserData({ onClose, analyst }: IShowUserData) {
 
+  const dispatch = useAppDispatch();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<number | null>(null);
   const [name, setName] = useState<string>(analyst.name);
   const [email, setEmail] = useState<string>(analyst.email);
   const [cpf, setCpf] = useState<string>(analyst.cpf);
@@ -22,6 +29,7 @@ function ShowUserData({ onClose, analyst }: IShowUserData) {
   const [department, setDepartment] = useState<string>(analyst.department);
   const [branch, setBranch] = useState<string>(analyst.branch);
   const [openPermissions, setOpenPermissions] = useState<boolean>(false);
+  const [showDelete, setShowDelete] = useState<boolean>(false);
 
   const inputs = [
     new DefaultInputData(name, setName, "analyst_name", "text", "Nome", "Nome", "Nome", undefined),
@@ -34,6 +42,24 @@ function ShowUserData({ onClose, analyst }: IShowUserData) {
 
   function onFormSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const newAnalyst = new Analyst(
+      name,
+      department,
+      branch,
+      phone,
+      email,
+      "",
+      "",
+      cpf,
+      analyst.id as number,
+    );
+    const putUserData = new PutUserData(
+      dispatch,
+      newAnalyst,
+      setLoading,
+      setError
+    );
+    putUserRequisition(putUserData);
   }
 
   return (
@@ -51,7 +77,7 @@ function ShowUserData({ onClose, analyst }: IShowUserData) {
         </div>
         <div className={styles.actions}>
           <DefaultButton label="Permissões" type="button" onClick={() => setOpenPermissions(true)} />
-          <DefaultButton label="Excluir usuário" type="button" />
+          <DefaultButton label="Excluir usuário" type="button" onClick={() => setShowDelete(true)} />
         </div>
       </div>
       <form onSubmit={onFormSubmit}>
@@ -74,6 +100,7 @@ function ShowUserData({ onClose, analyst }: IShowUserData) {
         ))}
         <DefaultButton label="Atualizar" type="submit" />
       </form>
+      {showDelete && <ShowConfirmUserDelete analystId={analyst.id as number} onClose={() => setShowDelete(false)} />}
       {openPermissions && <ShowUserPermissions analystId={analyst.id as number} onClose={() => setOpenPermissions(false)} />}
     </DefaultModal>
   )

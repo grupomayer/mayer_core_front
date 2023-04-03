@@ -14,7 +14,10 @@ function SideMenu() {
     new SideMenuButton("Usuários", [
       new SelectDataClass("users", "Buscar usuários"),
       new SelectDataClass("register_user", "Cadastrar usuário"),
-    ], userIcon, true)
+    ], userIcon, true),
+    new SideMenuButton("Prestadores", [
+      new SelectDataClass("users", "Transferir serviços")
+    ], userIcon)
   ]);
 
   function changeTab(button: SideMenuButton) {

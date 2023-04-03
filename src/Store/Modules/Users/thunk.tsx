@@ -1,9 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { httpCore } from "Http/http";
 import { PostUserData } from "Pages/RegisterUsers/utils/classes";
+import { DeleteUserData } from "Pages/Users/Components/ShowUserData/Components/ShowConfirmUserDelete/utils/classes";
 import { PutPermissionsData } from "Pages/Users/Components/ShowUserData/Components/ShowUserPermissions/utils/classes";
+import { PutUserData } from "Pages/Users/Components/ShowUserData/utils/classes";
 import { GetUsersData } from "Pages/Users/utils/classes";
-import { getUsers } from "./reducer";
+import { deleteUser, getUsers, putUser } from "./reducer";
 
 export function getUsersThunk({ department, userId, dispatch, setError, setLoading }: GetUsersData) {
     const thunk = createAsyncThunk(
@@ -13,6 +15,42 @@ export function getUsersThunk({ department, userId, dispatch, setError, setLoadi
                 .then(response => {
                     setLoading(true);
                     dispatch(getUsers(response.data));
+                })
+                .catch(error => {
+                    setError(error.response.status);
+                })
+        }
+    );
+
+    return thunk();
+}
+
+export function deleteUserThunk({ dispatch, analystId, adminId, setError, setLoading }: DeleteUserData) {
+    const thunk = createAsyncThunk(
+        "users/DELETE",
+        async () => {
+            httpCore.delete("")
+                .then(() => {
+                    setLoading(true);
+                    dispatch(deleteUser(analystId));
+                })
+                .catch(error => {
+                    setError(error.response.status);
+                })
+        }
+    );
+
+    return thunk();
+}
+
+export function putUserThunk({ dispatch, analyst, setError, setLoading }: PutUserData) {
+    const thunk = createAsyncThunk(
+        "users/PUT",
+        async () => {
+            httpCore.put("")
+                .then(response => {
+                    setLoading(true);
+                    dispatch(putUser(response.data));
                 })
                 .catch(error => {
                     setError(error.response.status);

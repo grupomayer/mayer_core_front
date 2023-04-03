@@ -4,15 +4,17 @@ import { DefaultInputData } from "Components/Inputs/DefaultInput/utils/classes";
 import ShowError from "Components/Modals/ShowError/show_error";
 import ShowLoading from "Components/Modals/ShowLoading/show_loading";
 import { useAuth } from "Hooks/useAuth/use_auth";
-import { useAppDispatch } from "Hooks/useRedux/use_redux";
+import { useAppDispatch, useAppSelector } from "Hooks/useRedux/use_redux";
 import { Analyst } from "Models/analyst";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { branchs, departments } from "Utils/datas";
 import { PostUserData } from "./utils/classes";
+import { analystTypes } from "./utils/data";
 import { postUserRequisition } from "./utils/requisitions";
 
 function RegisterUser() {
 
+  const users = useAppSelector(state => state.users);
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<number | null>(null);
@@ -20,9 +22,9 @@ function RegisterUser() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [cpf, setCpf] = useState<string>("");
-  const [department, setDepartment] = useState<string>("");
+  const [department, setDepartment] = useState<string>(departments[0].value);
   const [phone, setPhone] = useState<string>("");
-  const [branch, setBranch] = useState<string>("");
+  const [branch, setBranch] = useState<string>(branchs[0].value);
   const auth = useAuth();
 
   const inputs = [
@@ -37,13 +39,16 @@ function RegisterUser() {
 
   function onFormSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setLoading(true);
     const analyst = new Analyst(
       name,
       department,
       branch,
       phone,
       email,
-      password
+      password,
+      analystTypes.find(type => type.label === department)?.value,
+      cpf,
     );
     const postUserData = new PostUserData(
       dispatch,
@@ -54,6 +59,19 @@ function RegisterUser() {
     );
     postUserRequisition(postUserData);
   }
+
+  useEffect(() => {
+    if(error) {
+      setLoading(false);
+    }
+  }, [error])
+
+  useEffect(() => {
+    if(users.length > 0 && loading) {
+      setLoading(false);
+      alert("Usuário cadastrado com sucesso!");
+    }
+  }, [users, loading])
 
   return (
     <section>

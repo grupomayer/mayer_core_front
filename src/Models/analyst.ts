@@ -9,6 +9,8 @@ export class Analyst {
         public readonly phone: string,
         public readonly email: string,
         public readonly password: string,
+        public readonly analystType: string,
+        public readonly cpf: string,
         id?: number | null
     ) {
         if(id) {

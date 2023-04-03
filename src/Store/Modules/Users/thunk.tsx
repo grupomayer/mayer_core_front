@@ -26,7 +26,17 @@ export function postUsersThunk({ analyst, userId, dispatch, setError, setLoading
     const thunk = createAsyncThunk(
         "users/GET",
         async () => {
-            httpCore.post(``)
+            httpCore.post("/coordinator-register-analyst/", {
+                "name": analyst.name,
+                "email": analyst.email,
+                "password": analyst.password,
+                "cpf": analyst.cpf,
+                "department": analyst.department,
+                "phone": analyst.phone,
+                "branch": analyst.branch,
+                "analyst_type": analyst.analystType,
+                "user_id": userId
+            })
                 .then(response => {
                     setLoading(true);
                     dispatch(getUsers(response.data));

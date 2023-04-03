@@ -16,6 +16,7 @@
     border: 1px solid $side-menu-color;
     color: $light-color;
     padding-top: 5px;
+    font-size: 14px;
     .options {
         width: 100%;
         display: flex;
@@ -25,7 +26,6 @@
             background-color: transparent;
             color: white;
             font-weight: bold;
-            font-size: 20px;
             .carret {
                 cursor: pointer;
                 width: 20px;

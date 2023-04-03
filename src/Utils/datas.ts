@@ -18,5 +18,6 @@ export const departments: Array<SelectDataType> = [
     new SelectDataClass("T.I", "Desenvolvimento de Sistemas e TI"),
     new SelectDataClass("Administrativo", "Administrativo"),
     new SelectDataClass("Financeiro", "Financeiro"),
-    new SelectDataClass("avcb", "AVCB")
+    new SelectDataClass("AVCB", "AVCB"),
+    new SelectDataClass("Recepção", "Recepção")
 ]

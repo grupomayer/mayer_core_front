@@ -4,8 +4,8 @@ import SideMenuButtonComponent from "./SideMenuButton/side_menu_button";
 import { useState } from "react";
 import classNames from "classnames";
 import { SelectDataClass } from "Utils/classes";
-import logo from "./src/logo_mayer.png"
-import userIcon from "./src/user.png"
+import logo from "Images/logo_mayer.png"
+import userIcon from "Images/user.png"
 
 function SideMenu() {
 

@@ -3,54 +3,54 @@
 .bg {
     background-color: $side-menu-color;
     display: flex;
-    justify-content: center;
     align-items: center;
-    padding: 50px;
-    height: 80vh;
-    margin-top: 40px;
-    .content {
-        $size: 300px;
-        width: $size;
-        background-color: transparent;
+    .left {
+        padding: 0px 20px;
+        width: 50%;
+        background-color: white;
+        box-shadow: 5px 0px 5px #0000005b;
         .img {
+            margin-top: 100px;
             position: relative;
             top: 80px;
-            left: 25%;
+            left: 20px;
+            width: 150px;
             img {
                 width: 150px;
             }
         }
         .form {
             .title {
-                text-align: center;
+                text-align: start;
                 font-size: 24px;
             }
             height: 310px;
             border-radius: 30px;
             padding: 20px;
-            background-color: whitesmoke;
-            box-shadow: 5px 5px 5px #0000003d;
             z-index: 10;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
         }
         .down {
-            display: flex;
-            justify-content: center;
+            padding-bottom: 30px;
+            margin-left: 20px;
             .link { 
                 a {
                     color: $primary-color !important;
                 }
                 font-size: 14px;
                 width: 150px;
-                text-align: center;
-                background-color: whitesmoke;
+                text-align: start;
                 padding: 15px;
                 border-bottom-left-radius: 20px;
                 border-bottom-right-radius: 20px;
-                box-shadow: inset 0px 5px 3px #0000003d;
             }
         }
+    }
+    .right {
+        width: 50%;
+        display: flex;
+        justify-content: center;
     }
 }

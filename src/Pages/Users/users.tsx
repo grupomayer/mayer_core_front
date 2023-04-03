@@ -3,11 +3,14 @@ import DefaultInput from "Components/Inputs/DefaultInput/default_input";
 import ShowError from "Components/Modals/ShowError/show_error";
 import ShowLoading from "Components/Modals/ShowLoading/show_loading";
 import Table from "Components/Table/table";
+import { createButton } from "Components/Table/table_components";
 import { Line } from "Components/Table/utils/classes";
 import { useAuth } from "Hooks/useAuth/use_auth";
 import { useAppDispatch, useAppSelector } from "Hooks/useRedux/use_redux";
+import { Analyst } from "Models/analyst";
 import { FormEvent, useEffect, useState } from "react";
 import { departments } from "Utils/datas";
+import ShowUserData from "./Components/ShowUserData/show_user_data";
 import { GetUsersData } from "./utils/classes";
 import { getUsersRequisition } from "./utils/requisitions";
 
@@ -23,14 +26,25 @@ function Users() {
     user.email,
     user.department,
     user.branch,
-    user.phone
+    createButton(() => setOpenUser(new Analyst(
+      user.name,
+      user.department,
+      user.branch,
+      user.phone,
+      user.email,
+      "",
+      "",
+      user.cpf,
+      user.id,
+    )))
   )));
 
   const auth = useAuth();
   const [department, setDepartment] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [openUser, setOpenUser] = useState<Analyst>();
   const [error, setError] = useState<number | null>(null);
-  const titles = ["Nome", "Email", "Departamento", "Filial", "Telefone"];
+  const titles = ["Nome", "Email", "Departamento", "Filial", "Mais informações"];
 
   function onFormSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -71,6 +85,7 @@ function Users() {
         titles={titles}
         lines={usersLines}        
       />
+      {openUser && <ShowUserData analyst={openUser} onClose={() => setOpenUser(undefined)} />}
       <ShowLoading loading={loading} />
       <ShowError error={error} page="Users" setError={setError} />
     </section>

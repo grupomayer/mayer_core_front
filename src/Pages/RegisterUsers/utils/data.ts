@@ -8,8 +8,8 @@ export const analystTypes = [
     new SelectDataClass("legal_architecture", "Arquitetura"),
     new SelectDataClass("evtl", "EVTL"),
     new SelectDataClass("fire_fighting", "Incêndio"),
-    new SelectDataClass("", "Gestão Patrimonial"),
-    new SelectDataClass("T.I", "Desenvolvimento de Sistemas e TI"),
+    new SelectDataClass("wealth_management", "Gestão Patrimonial"),
+    new SelectDataClass("superuser", "Desenvolvimento de Sistemas e TI"),
     new SelectDataClass("admin", "Administrativo"),
     new SelectDataClass("financial", "Financeiro"),
     new SelectDataClass("avcb", "AVCB")

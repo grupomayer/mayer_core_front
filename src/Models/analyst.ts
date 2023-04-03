@@ -11,7 +11,23 @@ export class Analyst {
         public readonly password: string,
         public readonly analystType: string,
         public readonly cpf: string,
-        id?: number | null
+        id?: number | null,
+        public readonly data?: {
+            is_admin: boolean,
+            is_analyst: boolean,
+            is_avcb: boolean,
+            is_coordinator: boolean,
+            is_evtl: boolean,
+            is_executive_board: boolean,
+            is_financial: boolean,
+            is_fire_fighting: boolean,
+            is_legal_architecture: boolean,
+            is_licensing: boolean,
+            is_publicity: boolean,
+            is_register_corporate: boolean,
+            is_superuser: boolean,
+            is_wealth_management: boolean
+        }
     ) {
         if(id) {
             this._id = id;

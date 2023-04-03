@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from "Hooks/useRedux/use_redux";
 import ShowLoading from "Components/Modals/ShowLoading/show_loading";
 import ShowError from "Components/Modals/ShowError/show_error";
 import { useAuth } from "Hooks/useAuth/use_auth";
+import logoImg from "Images/logo_mayer.png";
 
 function Login() {
 
@@ -45,7 +46,7 @@ function Login() {
 
   return (
     <section className={styles.bg}>
-      <div className={styles.content}>
+      <div className={styles.left}>
         <div className={styles.img}>
           <img
             alt="Ícone de usuário"
@@ -83,6 +84,12 @@ function Login() {
             </Link>
           </div>
         </div>
+      </div>
+      <div className={styles.right}>
+        <img
+          src={logoImg}
+          alt="Logo da empresa Grupo Mayer, em branco"
+        />
       </div>
       <ShowLoading loading={loading} />
       <ShowError error={error} page="Login" setError={setError} />

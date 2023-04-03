@@ -1,0 +1,30 @@
+@import "Styles/_variables.scss";
+@import "../modals.module.scss";
+
+@mixin flex-center-align {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    @include defocus-bg();
+    @include flex-center-align();
+    .box {
+        @include modal-box;
+        .error {
+            @include flex-center-align();
+            flex-direction: column;
+            margin-top: 40px;
+            &__code {
+                font-size: 36px;
+                color: $primary-color;
+            }
+            &__message {
+                text-align: center;
+                padding: 0px 20px;
+                max-width: 100%;
+            }
+        }
+    }
+}

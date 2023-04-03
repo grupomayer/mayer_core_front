@@ -1,0 +1,17 @@
+@import "Styles/_variables.scss";
+@import "../modals.module.scss";
+
+@mixin flex-center-align {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.background {
+    @include defocus-bg();
+    @include flex-center-align();
+    .box {
+        @include modal-box();
+        @include flex-center-align();
+    }
+}

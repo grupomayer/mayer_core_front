@@ -1,0 +1,21 @@
+.user {
+    display: flex;
+    align-items: center;
+    .profile {
+        background-color: #00000038;
+        width: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 40px;
+        margin: 0px 30px;
+        img {
+            width: 68px;
+            object-fit: cover;
+            object-position: center center;
+        }
+    }
+    .actions {
+        width: 100%;
+    }
+}

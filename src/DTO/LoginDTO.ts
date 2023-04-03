@@ -1,4 +1,5 @@
 export class LoginDTO {
+
     constructor(
         public readonly token: string,
         public readonly data: {

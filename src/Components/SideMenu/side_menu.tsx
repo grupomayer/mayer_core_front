@@ -16,7 +16,7 @@ function SideMenu() {
       new SelectDataClass("register_user", "Cadastrar usuário"),
     ], userIcon, true),
     new SideMenuButton("Prestadores", [
-      new SelectDataClass("users", "Transferir serviços")
+      new SelectDataClass("transfer_services", "Transferir serviços")
     ], userIcon)
   ]);
 

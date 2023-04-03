@@ -9,6 +9,7 @@ import { lazy, Suspense } from "react";
 import LoadingModal from "Components/Modals/LoadingModal/loading_modal";
 import Header from "Components/Header/header";
 import RegisterUser from "Pages/RegisterUsers/register_user";
+import TransferServices from "Pages/TransferServices/transfer_services";
 
 const BasePage = lazy(() => import("Components/BasePage/base_page"));
 const AuthWrapper = lazy(() => import("Components/AuthWrapper/auth_wrapper"));
@@ -27,6 +28,7 @@ function PagesRoutes() {
                 <Route element={<AuthWrapper />}>
                   <Route path="/users" element={<Users />} />
                   <Route path="/register_user" element={<RegisterUser />} />
+                  <Route path="/transfer_services" element={<TransferServices />} />
                 </Route>
               </Route>
             </Routes>

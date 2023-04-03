@@ -32,8 +32,8 @@ function RegisterUser() {
     new DefaultInputData(email, setEmail, "user_email", "email", "Email", "Email", "Email"),
     new DefaultInputData(password, setPassword, "user_password", "password", "Senha", "Senha", "Senha"),
     new DefaultInputData(cpf, setCpf, "user_cpf", "number", "CPF", "CPF", "CPF"),
-    new DefaultInputData(department, setDepartment, "user_department", "select", "Departamento", "Departamento", "Departamento", departments),
     new DefaultInputData(phone, setPhone, "user_phone", "number", "Telefone", "Telefone", "Telefone"),
+    new DefaultInputData(department, setDepartment, "user_department", "select", "Departamento", "Departamento", "Departamento", departments),
     new DefaultInputData(branch, setBranch, "user_branch", "select", "Filial", "Filial", "Filial", branchs),
   ];
 

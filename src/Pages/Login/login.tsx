@@ -44,6 +44,12 @@ function Login() {
     }
   }, [authenticatedData, loading])
 
+  useEffect(() => {
+    if(error) {
+      setLoading(false);
+    }
+  }, [error])
+
   return (
     <section className={styles.bg}>
       <div className={styles.left}>

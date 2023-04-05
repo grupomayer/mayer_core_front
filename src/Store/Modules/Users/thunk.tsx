@@ -47,7 +47,9 @@ export function putUserThunk({ dispatch, analyst, setError, setLoading }: PutUse
     const thunk = createAsyncThunk(
         "users/PUT",
         async () => {
-            httpCore.put("")
+            httpCore.put("/", {
+                
+            })
                 .then(response => {
                     setLoading(true);
                     dispatch(putUser(response.data));

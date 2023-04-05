@@ -1,5 +1,4 @@
 import DefaultButton from "Components/Inputs/DefaultButton/default_button";
-import DefaultInput from "Components/Inputs/DefaultInput/default_input";
 import ShowError from "Components/Modals/ShowError/show_error";
 import ShowLoading from "Components/Modals/ShowLoading/show_loading";
 import Table from "Components/Table/table";
@@ -8,12 +7,11 @@ import { Line } from "Components/Table/utils/classes";
 import { UserDTO } from "DTO/UserDTO";
 import { useAuth } from "Hooks/useAuth/use_auth";
 import { useAppDispatch, useAppSelector } from "Hooks/useRedux/use_redux";
-import { Analyst } from "Models/analyst";
 import { FormEvent, useEffect, useState } from "react";
-import { departments } from "Utils/datas";
 import ShowUserData from "./Components/ShowUserData/show_user_data";
 import { GetUsersData } from "./utils/classes";
 import { getUsersRequisition } from "./utils/requisitions";
+import styles from "./users.module.scss";
 
 function Users() {
 
@@ -57,7 +55,7 @@ function Users() {
   return (
     <section>
       <h1>Buscar usuários</h1>
-      <form onSubmit={onFormSubmit}>
+      <form onSubmit={onFormSubmit} className={styles.search}>
         <DefaultButton label="Buscar" type="submit" />
       </form>
       <Table

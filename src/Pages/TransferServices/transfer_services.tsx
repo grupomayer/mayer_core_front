@@ -8,6 +8,7 @@ import { Line } from "Components/Table/utils/classes";
 import { useAuth } from "Hooks/useAuth/use_auth";
 import { useAppDispatch, useAppSelector } from "Hooks/useRedux/use_redux";
 import { Analyst } from "Models/analyst";
+import { analystTypes } from "Pages/RegisterUsers/utils/data";
 import { GetUsersData } from "Pages/Users/utils/classes";
 import { getUsersRequisition } from "Pages/Users/utils/requisitions";
 import { FormEvent, useEffect, useState } from "react";
@@ -33,7 +34,7 @@ function TransferServices() {
       user.phone,
       user.email,
       "",
-      "",
+      analystTypes.find(type => type.label === user.department)?.value,
       user.cpf,
       user.id,
     )))
@@ -71,7 +72,7 @@ function TransferServices() {
       <h2 className={styles.subtitle}>
         Buscar usuários
       </h2>
-      <form onSubmit={onFormSubmit}>
+      <form onSubmit={onFormSubmit} className={styles.search}>
         <DefaultButton label="Buscar" type="submit" />
       </form>
       <Table

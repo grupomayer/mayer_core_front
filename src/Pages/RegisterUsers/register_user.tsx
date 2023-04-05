@@ -60,6 +60,16 @@ function RegisterUser() {
     postUserRequisition(postUserData);
   }
 
+  function resetInputs() {
+    setName("");
+    setDepartment("");
+    setBranch("");
+    setPhone("");
+    setEmail("");
+    setPassword("");
+    setCpf("");
+  }
+
   useEffect(() => {
     if(error) {
       setLoading(false);
@@ -67,8 +77,10 @@ function RegisterUser() {
   }, [error])
 
   useEffect(() => {
+    console.log(users, loading);
     if(users.length > 0 && loading) {
       setLoading(false);
+      resetInputs();
       alert("Usuário cadastrado com sucesso!");
     }
   }, [users, loading])

@@ -5,9 +5,9 @@ import { DeleteUserData } from "Pages/Users/Components/ShowUserData/Components/S
 import { PutPermissionsData } from "Pages/Users/Components/ShowUserData/Components/ShowUserPermissions/utils/classes";
 import { PutUserData } from "Pages/Users/Components/ShowUserData/utils/classes";
 import { GetUsersData } from "Pages/Users/utils/classes";
-import { deleteUser, getUsers, putUser } from "./reducer";
+import { deleteUser, getUsers, postUser, putUser } from "./reducer";
 
-export function getUsersThunk({ department, userId, dispatch, setError, setLoading }: GetUsersData) {
+export function getUsersThunk({ userId, dispatch, setError, setLoading }: GetUsersData) {
     const thunk = createAsyncThunk(
         "users/GET",
         async () => {
@@ -29,7 +29,7 @@ export function deleteUserThunk({ dispatch, analystId, adminId, setError, setLoa
     const thunk = createAsyncThunk(
         "users/DELETE",
         async () => {
-            httpCore.delete("")
+            httpCore.delete(`/register-superuser/${analystId}/${adminId}/`)
                 .then(() => {
                     setLoading(true);
                     dispatch(deleteUser(analystId));
@@ -112,7 +112,7 @@ export function postUsersThunk({ analyst, userId, dispatch, setError, setLoading
             })
                 .then(response => {
                     setLoading(true);
-                    dispatch(getUsers(response.data));
+                    dispatch(postUser(response.data));
                 })
                 .catch(error => {
                     setError(error.response.status);

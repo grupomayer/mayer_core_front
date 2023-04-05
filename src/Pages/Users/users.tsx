@@ -5,6 +5,7 @@ import ShowLoading from "Components/Modals/ShowLoading/show_loading";
 import Table from "Components/Table/table";
 import { createButton } from "Components/Table/table_components";
 import { Line } from "Components/Table/utils/classes";
+import { UserDTO } from "DTO/UserDTO";
 import { useAuth } from "Hooks/useAuth/use_auth";
 import { useAppDispatch, useAppSelector } from "Hooks/useRedux/use_redux";
 import { Analyst } from "Models/analyst";
@@ -26,23 +27,12 @@ function Users() {
     user.email,
     user.department,
     user.branch,
-    createButton(() => setOpenUser(new Analyst(
-      user.name,
-      user.department,
-      user.branch,
-      user.phone,
-      user.email,
-      "",
-      "",
-      user.cpf,
-      user.id,
-    )))
+    createButton(() => setOpenUser(user))
   )));
 
   const auth = useAuth();
-  const [department, setDepartment] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [openUser, setOpenUser] = useState<Analyst>();
+  const [openUser, setOpenUser] = useState<UserDTO>();
   const [error, setError] = useState<number | null>(null);
   const titles = ["Nome", "Email", "Departamento", "Filial", "Mais informações"];
 
@@ -51,7 +41,6 @@ function Users() {
     setLoading(true);
     const getUsersData = new GetUsersData(
       dispatch,
-      department,
       auth.userId as number,
       setLoading,
       setError
@@ -69,23 +58,13 @@ function Users() {
     <section>
       <h1>Buscar usuários</h1>
       <form onSubmit={onFormSubmit}>
-        <DefaultInput
-          value={department}
-          onChange={setDepartment}
-          id="department"
-          label="Departamento"
-          placeholder="Departamento"
-          title="Departamento"
-          type="select"
-          data={departments}
-        />
         <DefaultButton label="Buscar" type="submit" />
       </form>
       <Table
         titles={titles}
         lines={usersLines}        
       />
-      {openUser && <ShowUserData analyst={openUser} onClose={() => setOpenUser(undefined)} />}
+      {openUser && <ShowUserData user={openUser} onClose={() => setOpenUser(undefined)} />}
       <ShowLoading loading={loading} />
       <ShowError error={error} page="Users" setError={setError} />
     </section>

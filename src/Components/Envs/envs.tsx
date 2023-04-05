@@ -1,1 +1,2 @@
-export const BASEURL = process.env.REACT_APP_BASE_URL;
+export const BASEURLCORE = process.env.REACT_APP_BASE_URL_CORE;
+export const BASEURLPROVIDER = process.env.REACT_APP_BASE_URL_PROVIDER;

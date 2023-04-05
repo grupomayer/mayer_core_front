@@ -12,12 +12,26 @@ import { PutUserData } from "./utils/classes";
 import { useAppDispatch } from "Hooks/useRedux/use_redux";
 import { putUserRequisition } from "./utils/requisitions";
 import ShowConfirmUserDelete from "./Components/ShowConfirmUserDelete/show_confirm_user_delete";
+import { UserDTO } from "DTO/UserDTO";
+import { analystTypes } from "Pages/RegisterUsers/utils/data";
 
 interface IShowUserData {
-  onClose: Function,
-  analyst: Analyst
+  onClose: Function;
+  user: UserDTO;
 }
-function ShowUserData({ onClose, analyst }: IShowUserData) {
+function ShowUserData({ onClose, user }: IShowUserData) {
+
+  const analyst = new Analyst(
+    user.name,
+    user.department,
+    user.branch,
+    user.phone,
+    user.email,
+    "",
+    analystTypes.find(type => type.label === user.department)?.value,
+    user.cpf,
+    user.id  
+  );
 
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState<boolean>(false);
@@ -101,7 +115,7 @@ function ShowUserData({ onClose, analyst }: IShowUserData) {
         <DefaultButton label="Atualizar" type="submit" />
       </form>
       {showDelete && <ShowConfirmUserDelete analystId={analyst.id as number} onClose={() => setShowDelete(false)} />}
-      {openPermissions && <ShowUserPermissions analystId={analyst.id as number} onClose={() => setOpenPermissions(false)} />}
+      {openPermissions && <ShowUserPermissions user={user} onClose={() => setOpenPermissions(false)} />}
     </DefaultModal>
   )
 }

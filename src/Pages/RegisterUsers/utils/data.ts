@@ -2,7 +2,7 @@ import { SelectDataClass } from "Utils/classes";
 
 export const analystTypes = [
     new SelectDataClass("executive_board", "Diretoria"),
-    new SelectDataClass("registrary", "Registrário"),
+    new SelectDataClass("register_corporate", "Registrário"),
     new SelectDataClass("publicity", "Publicidade"),
     new SelectDataClass("licensing", "Licenciamento"),
     new SelectDataClass("legal_architecture", "Arquitetura"),

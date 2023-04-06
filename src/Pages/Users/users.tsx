@@ -1,18 +1,17 @@
 import DefaultButton from "Components/Inputs/DefaultButton/default_button";
-import DefaultInput from "Components/Inputs/DefaultInput/default_input";
 import ShowError from "Components/Modals/ShowError/show_error";
 import ShowLoading from "Components/Modals/ShowLoading/show_loading";
 import Table from "Components/Table/table";
 import { createButton } from "Components/Table/table_components";
 import { Line } from "Components/Table/utils/classes";
+import { UserDTO } from "DTO/UserDTO";
 import { useAuth } from "Hooks/useAuth/use_auth";
 import { useAppDispatch, useAppSelector } from "Hooks/useRedux/use_redux";
-import { Analyst } from "Models/analyst";
 import { FormEvent, useEffect, useState } from "react";
-import { departments } from "Utils/datas";
 import ShowUserData from "./Components/ShowUserData/show_user_data";
 import { GetUsersData } from "./utils/classes";
 import { getUsersRequisition } from "./utils/requisitions";
+import styles from "./users.module.scss";
 
 function Users() {
 
@@ -26,23 +25,13 @@ function Users() {
     user.email,
     user.department,
     user.branch,
-    createButton(() => setOpenUser(new Analyst(
-      user.name,
-      user.department,
-      user.branch,
-      user.phone,
-      user.email,
-      "",
-      "",
-      user.cpf,
-      user.id,
-    )))
+    createButton(() => setOpenUser(user))
   )));
 
   const auth = useAuth();
-  const [department, setDepartment] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [openUser, setOpenUser] = useState<Analyst>();
+  const [updated, setUpdated] = useState<boolean>(false);
+  const [openUser, setOpenUser] = useState<UserDTO>();
   const [error, setError] = useState<number | null>(null);
   const titles = ["Nome", "Email", "Departamento", "Filial", "Mais informações"];
 
@@ -51,41 +40,31 @@ function Users() {
     setLoading(true);
     const getUsersData = new GetUsersData(
       dispatch,
-      department,
       auth.userId as number,
-      setLoading,
+      setUpdated,
       setError
     );
     getUsersRequisition(getUsersData);
   }
 
   useEffect(() => {
-    if(usersLines.length > 0 && loading) {
+    if(updated && loading && usersLines.length > 0) {
       setLoading(false);
+      setUpdated(false);
     }
-  }, [usersLines, loading])
+  }, [usersLines])
 
   return (
     <section>
       <h1>Buscar usuários</h1>
-      <form onSubmit={onFormSubmit}>
-        <DefaultInput
-          value={department}
-          onChange={setDepartment}
-          id="department"
-          label="Departamento"
-          placeholder="Departamento"
-          title="Departamento"
-          type="select"
-          data={departments}
-        />
+      <form onSubmit={onFormSubmit} className={styles.search}>
         <DefaultButton label="Buscar" type="submit" />
       </form>
       <Table
         titles={titles}
         lines={usersLines}        
       />
-      {openUser && <ShowUserData analyst={openUser} onClose={() => setOpenUser(undefined)} />}
+      {openUser && <ShowUserData user={openUser} onClose={() => setOpenUser(undefined)} />}
       <ShowLoading loading={loading} />
       <ShowError error={error} page="Users" setError={setError} />
     </section>

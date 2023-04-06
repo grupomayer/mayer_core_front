@@ -1,5 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { LoginDTO } from "DTO/LoginDTO";
 import { httpCore } from "Http/http";
 import { PostAuthenticationData } from "Pages/Login/utils/classes";
 import { authenticate } from "./reducer";
@@ -13,9 +12,7 @@ export function postAuthenticationThunk({ dispatch, email, password, setLoading,
                 "password": password
             })
                 .then(response => {
-                    const dataResponse: LoginDTO = response.data;
-                    setLoading(true);
-                    dispatch(authenticate(dataResponse));
+                    dispatch(authenticate(response.data));
                 })
                 .catch(error => {
                     setError(error.response.status);

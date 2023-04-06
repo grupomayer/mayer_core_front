@@ -10,6 +10,9 @@ const usersSlice = createSlice({
         getUsers: (state, { payload }) => {
             return payload;
         },
+        postUser: (state, { payload }) => {
+            state.push(payload);
+        },
         deleteUser: (state, { payload }) => {
             return state.filter(user => user.id !== payload);
         },
@@ -25,4 +28,4 @@ const usersSlice = createSlice({
 });
 
 export const usersReducer = usersSlice.reducer;
-export const { getUsers, deleteUser, putUser } = usersSlice.actions;
+export const { getUsers, deleteUser, putUser, postUser } = usersSlice.actions;

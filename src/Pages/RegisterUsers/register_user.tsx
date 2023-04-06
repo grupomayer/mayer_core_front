@@ -7,9 +7,8 @@ import { useAuth } from "Hooks/useAuth/use_auth";
 import { useAppDispatch, useAppSelector } from "Hooks/useRedux/use_redux";
 import { Analyst } from "Models/analyst";
 import { FormEvent, useEffect, useState } from "react";
-import { branchs, departments } from "Utils/datas";
+import { branchs, departments, findCurAnalystType } from "Utils/datas";
 import { PostUserData } from "./utils/classes";
-import { analystTypes } from "./utils/data";
 import { postUserRequisition } from "./utils/requisitions";
 
 function RegisterUser() {
@@ -47,7 +46,7 @@ function RegisterUser() {
       phone,
       email,
       password,
-      analystTypes.find(type => type.label === department)?.value,
+      findCurAnalystType(department),
       cpf,
     );
     const postUserData = new PostUserData(
@@ -60,6 +59,16 @@ function RegisterUser() {
     postUserRequisition(postUserData);
   }
 
+  function resetInputs() {
+    setName("");
+    setDepartment("");
+    setBranch("");
+    setPhone("");
+    setEmail("");
+    setPassword("");
+    setCpf("");
+  }
+
   useEffect(() => {
     if(error) {
       setLoading(false);
@@ -69,6 +78,7 @@ function RegisterUser() {
   useEffect(() => {
     if(users.length > 0 && loading) {
       setLoading(false);
+      resetInputs();
       alert("Usuário cadastrado com sucesso!");
     }
   }, [users, loading])

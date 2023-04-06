@@ -4,6 +4,7 @@ import { DefaultInputData } from "Components/Inputs/DefaultInput/utils/classes";
 import DefaultModal from "Components/Modals/DefaultModal/default_modal";
 import ShowError from "Components/Modals/ShowError/show_error";
 import ShowLoading from "Components/Modals/ShowLoading/show_loading";
+import { UserDTO } from "DTO/UserDTO";
 import { useAuth } from "Hooks/useAuth/use_auth";
 import { useAppDispatch } from "Hooks/useRedux/use_redux";
 import { FormEvent, useEffect, useState } from "react";
@@ -13,29 +14,30 @@ import { putPermissionsRequisition } from "./utils/requisitions";
 
 interface IShowUserPermissions {
   onClose: Function;
-  analystId: number;
+  user: UserDTO;
 }
-function ShowUserPermissions({ onClose, analystId }: IShowUserPermissions) {
+function ShowUserPermissions({ onClose, user }: IShowUserPermissions) {
 
   const auth = useAuth();
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState<boolean>(false);
   const [updated, setUpdated] = useState<boolean>(false);
   const [error, setError] = useState<number | null>(null);
-  const [isCoordinator, setIsCoordinator] = useState<boolean>(false);
-  const [isAnalyst, setIsAnalyst] = useState<boolean>(false);
-  const [isSuperUser, setIsSuperUser] = useState<boolean>(false);
-  const [isAdmin, setIsAdmin] = useState<boolean>(false);
-  const [isFinancial, setIsFinancial] = useState<boolean>(false);
-  const [isExecutiveBoard, setIsExecutiveBoard] = useState<boolean>(false);
-  const [isLegalArchitecture, setIsLegalArchitecture] = useState<boolean>(false);
-  const [isPublicity, setIsPublicity] = useState<boolean>(false);
-  const [isEvtl, setIsEvtl] = useState<boolean>(false);
-  const [isFireFighting, setIsFireFighting] = useState<boolean>(false);
-  const [isLicensing, setIsLicensing] = useState<boolean>(false);
-  const [isWealthManagement, setIsWealthManagement] = useState<boolean>(false);
-  const [isRegisterCorporate, setIsRegisterCorporate] = useState<boolean>(false);
-  const [isAvcb, setIsAvcb] = useState<boolean>(false);
+
+  const [isCoordinator, setIsCoordinator] = useState<boolean>(user.is_coordinator);
+  const [isAnalyst, setIsAnalyst] = useState<boolean>(user.is_analyst);
+  const [isSuperUser, setIsSuperUser] = useState<boolean>(user.is_superuser);
+  const [isAdmin, setIsAdmin] = useState<boolean>(user.is_admin);
+  const [isFinancial, setIsFinancial] = useState<boolean>(user.is_financial);
+  const [isExecutiveBoard, setIsExecutiveBoard] = useState<boolean>(user.is_executive_board);
+  const [isLegalArchitecture, setIsLegalArchitecture] = useState<boolean>(user.is_legal_architecture);
+  const [isPublicity, setIsPublicity] = useState<boolean>(user.is_publicity);
+  const [isEvtl, setIsEvtl] = useState<boolean>(user.is_evtl);
+  const [isFireFighting, setIsFireFighting] = useState<boolean>(user.is_fire_fighting);
+  const [isLicensing, setIsLicensing] = useState<boolean>(user.is_licensing);
+  const [isWealthManagement, setIsWealthManagement] = useState<boolean>(user.is_wealth_management);
+  const [isRegisterCorporate, setIsRegisterCorporate] = useState<boolean>(user.is_register_corporate);
+  const [isAvcb, setIsAvcb] = useState<boolean>(user.is_avcb);
 
   const permissionsInputs = [
     new DefaultInputData(isCoordinator, setIsCoordinator, "is_coordinator", "checkbox", "Coordenador", "Coordenador", "Coordenador", undefined, false),
@@ -58,7 +60,7 @@ function ShowUserPermissions({ onClose, analystId }: IShowUserPermissions) {
     e.preventDefault();
     setLoading(true);
     const permissions = new PermissionsData(
-      analystId,
+      user.id,
       isAdmin,
       isFinancial,
       isExecutiveBoard,

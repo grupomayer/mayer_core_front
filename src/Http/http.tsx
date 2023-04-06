@@ -1,5 +1,5 @@
 import axios, { InternalAxiosRequestConfig } from "axios";
-import { BASEURL } from "Components/Envs/envs";
+import { BASEURLCORE, BASEURLPROVIDER } from "Components/Envs/envs";
 
 let HTTP_TOKEN: string | null = null;
 export function setHttpToken(token: string | null) {
@@ -7,7 +7,11 @@ export function setHttpToken(token: string | null) {
 }
 
 export const httpCore = axios.create({
-    baseURL: `${BASEURL}/api-core`,
+    baseURL: BASEURLCORE,
+})
+
+export const httpProvider = axios.create({
+    baseURL: BASEURLPROVIDER,
 })
 
 function onRequest(response: InternalAxiosRequestConfig<any>): InternalAxiosRequestConfig<any> {
@@ -23,3 +27,4 @@ function onRequestError(error: any): Promise<any> {
     return Promise.reject(error);
 }
 httpCore.interceptors.request.use(onRequest, onRequestError);
+httpProvider.interceptors.request.use(onRequest, onRequestError);

@@ -4,17 +4,18 @@ import DefaultModal from "Components/Modals/DefaultModal/default_modal";
 import styles from "./show_user_data.module.scss";
 import { DefaultInputData } from "Components/Inputs/DefaultInput/utils/classes";
 import { Analyst } from "Models/analyst";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { branchs, departments, findCurAnalystType } from "Utils/datas";
 import userImg from "Images/user.png";
 import ShowUserPermissions from "./Components/ShowUserPermissions/show_user_permissions";
 import { PutUserData } from "./utils/classes";
-import { useAppDispatch } from "Hooks/useRedux/use_redux";
+import { useAppDispatch, useAppSelector } from "Hooks/useRedux/use_redux";
 import { putUserRequisition } from "./utils/requisitions";
 import ShowConfirmUserDelete from "./Components/ShowConfirmUserDelete/show_confirm_user_delete";
 import { UserDTO } from "DTO/UserDTO";
 import ShowLoading from "Components/Modals/ShowLoading/show_loading";
 import ShowError from "Components/Modals/ShowError/show_error";
+import { useAuth } from "Hooks/useAuth/use_auth";
 
 interface IShowUserData {
   onClose: Function;
@@ -34,8 +35,11 @@ function ShowUserData({ onClose, user }: IShowUserData) {
     user.id  
   );
 
+  const users = useAppSelector(state => state.users);
   const dispatch = useAppDispatch();
+  const auth = useAuth();
   const [loading, setLoading] = useState<boolean>(false);
+  const [updated, setUpdated] = useState<boolean>(false);
   const [error, setError] = useState<number | null>(null);
   const [name, setName] = useState<string>(analyst.name);
   const [email, setEmail] = useState<string>(analyst.email);
@@ -57,6 +61,7 @@ function ShowUserData({ onClose, user }: IShowUserData) {
 
   function onFormSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setLoading(true);
     const newAnalyst = new Analyst(
       name,
       department,
@@ -64,14 +69,15 @@ function ShowUserData({ onClose, user }: IShowUserData) {
       phone,
       email,
       "",
-      "",
+      analyst.analystType,
       cpf,
       analyst.id as number,
     );
     const putUserData = new PutUserData(
       dispatch,
       newAnalyst,
-      setLoading,
+      auth.userId as number,
+      setUpdated,
       setError
     );
     putUserRequisition(putUserData);
@@ -81,6 +87,15 @@ function ShowUserData({ onClose, user }: IShowUserData) {
     setShowDelete(false);
     onClose();
   }
+
+  useEffect(() => {
+    if(updated && loading) {
+      setLoading(false);
+      setUpdated(false);
+      alert("Usuário atualizado com sucesso")!
+      onClose();
+    }
+  }, [updated, loading])
 
   return (
     <DefaultModal

@@ -43,12 +43,19 @@ export function deleteUserThunk({ dispatch, analystId, adminId, setError, setLoa
     return thunk();
 }
 
-export function putUserThunk({ dispatch, analyst, setError, setLoading }: PutUserData) {
+export function putUserThunk({ dispatch, analyst, userId, setError, setLoading }: PutUserData) {
     const thunk = createAsyncThunk(
         "users/PUT",
         async () => {
-            httpCore.put("/", {
-                
+            httpCore.put("/register-coordinator/", {
+                "name": analyst.name,
+                "cpf": analyst.cpf,
+                "department": analyst.department,
+                "phone": analyst.phone,
+                "analyst_type": analyst.analystType,
+                "branch": analyst.branch,
+                "user_id": analyst.id,
+                "admin_id": userId
             })
                 .then(response => {
                     setLoading(true);

@@ -1,5 +1,7 @@
 import DefaultButton from "Components/Inputs/DefaultButton/default_button";
 import DefaultModal from "Components/Modals/DefaultModal/default_modal";
+import ShowError from "Components/Modals/ShowError/show_error";
+import ShowLoading from "Components/Modals/ShowLoading/show_loading";
 import { useAuth } from "Hooks/useAuth/use_auth";
 import { useAppDispatch, useAppSelector } from "Hooks/useRedux/use_redux";
 import { useEffect, useState } from "react";
@@ -58,6 +60,8 @@ function ShowConfirmUserDelete({ analystId, onClose }: IShowConfirmUserDelete) {
           <DefaultButton label="Deletar" type="button" onClick={() => deleteUser()} />
         </div>
       </div>
+      <ShowLoading loading={loading} />
+      <ShowError error={error} page="ShowUserData" setError={setError} />
     </DefaultModal>
   )
 }

@@ -14,6 +14,8 @@ import { putUserRequisition } from "./utils/requisitions";
 import ShowConfirmUserDelete from "./Components/ShowConfirmUserDelete/show_confirm_user_delete";
 import { UserDTO } from "DTO/UserDTO";
 import { analystTypes } from "Pages/RegisterUsers/utils/data";
+import ShowLoading from "Components/Modals/ShowLoading/show_loading";
+import ShowError from "Components/Modals/ShowError/show_error";
 
 interface IShowUserData {
   onClose: Function;
@@ -116,6 +118,8 @@ function ShowUserData({ onClose, user }: IShowUserData) {
       </form>
       {showDelete && <ShowConfirmUserDelete analystId={analyst.id as number} onClose={() => setShowDelete(false)} />}
       {openPermissions && <ShowUserPermissions user={user} onClose={() => setOpenPermissions(false)} />}
+      <ShowLoading loading={loading} />
+      <ShowError error={error} page="ShowUserData" setError={setError} />
     </DefaultModal>
   )
 }

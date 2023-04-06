@@ -30,6 +30,7 @@ function Users() {
 
   const auth = useAuth();
   const [loading, setLoading] = useState<boolean>(false);
+  const [updated, setUpdated] = useState<boolean>(false);
   const [openUser, setOpenUser] = useState<UserDTO>();
   const [error, setError] = useState<number | null>(null);
   const titles = ["Nome", "Email", "Departamento", "Filial", "Mais informações"];
@@ -40,17 +41,18 @@ function Users() {
     const getUsersData = new GetUsersData(
       dispatch,
       auth.userId as number,
-      setLoading,
+      setUpdated,
       setError
     );
     getUsersRequisition(getUsersData);
   }
 
   useEffect(() => {
-    if(usersLines.length > 0 && loading) {
+    if(updated && loading && usersLines.length > 0) {
       setLoading(false);
+      setUpdated(false);
     }
-  }, [usersLines, loading])
+  }, [usersLines])
 
   return (
     <section>

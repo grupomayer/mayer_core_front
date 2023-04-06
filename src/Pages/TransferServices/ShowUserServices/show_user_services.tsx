@@ -25,6 +25,7 @@ export function ShowUserServices({ onClose, user }: IShowUserServices) {
   const dispatch = useAppDispatch();
   const auth = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
+  const [updated, setUpdated] = useState<boolean>(false);
   const [error, setError] = useState<number | null>(null);
   const [selectedService, setSelectedService] = useState<ServiceDTO>();
   const [finishedFilter, setFinishedFilter] = useState<boolean>(false);
@@ -48,7 +49,7 @@ export function ShowUserServices({ onClose, user }: IShowUserServices) {
         dispatch,
         user.id as number,
         auth.userId as number,
-        setLoading,
+        setUpdated,
         setError
       )
       getUserServicesRequisition(getUserServicesData);
@@ -62,16 +63,16 @@ export function ShowUserServices({ onClose, user }: IShowUserServices) {
   }, [error])
 
   useEffect(() => {
-    if(services.length > 0 && loading) {
+    if(loading && updated) {
       setLoading(false);
     }
-  }, [loading, services])
+  }, [services, updated])
 
   return (
     <DefaultModal
       onClose={onClose}
       size="xl"
-      title="Serviços do usuário"
+      title={`Serviços de '${user.name}'`}
     >
       {!loading && (
         <>

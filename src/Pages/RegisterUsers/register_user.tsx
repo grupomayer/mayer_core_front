@@ -77,7 +77,6 @@ function RegisterUser() {
   }, [error])
 
   useEffect(() => {
-    console.log(users, loading);
     if(users.length > 0 && loading) {
       setLoading(false);
       resetInputs();

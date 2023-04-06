@@ -26,7 +26,6 @@ export function getUserServicesThunk({ analystId, userId, dispatch, setError, se
                 .then(response => {
                     setLoading(true);
                     const responseData = createServices(response.data.data, response.data.urls);
-                    console.log(responseData);
                     dispatch(getServices(responseData));
                 })
                 .catch(error => {

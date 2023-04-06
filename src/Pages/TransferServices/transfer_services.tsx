@@ -1,5 +1,4 @@
 import DefaultButton from "Components/Inputs/DefaultButton/default_button";
-import DefaultInput from "Components/Inputs/DefaultInput/default_input";
 import ShowError from "Components/Modals/ShowError/show_error";
 import ShowLoading from "Components/Modals/ShowLoading/show_loading";
 import Table from "Components/Table/table";
@@ -12,7 +11,6 @@ import { analystTypes } from "Pages/RegisterUsers/utils/data";
 import { GetUsersData } from "Pages/Users/utils/classes";
 import { getUsersRequisition } from "Pages/Users/utils/requisitions";
 import { FormEvent, useEffect, useState } from "react";
-import { departments } from "Utils/datas";
 import ShowUserServices from "./ShowUserServices/show_user_services";
 import styles from "./transfer_service.module.scss";
 
@@ -36,12 +34,13 @@ function TransferServices() {
       "",
       analystTypes.find(type => type.label === user.department)?.value,
       user.cpf,
-      user.id,
+      user.id
     )))
   )));
 
   const auth = useAuth();
   const [loading, setLoading] = useState<boolean>(false);
+  const [updated, setUpdated] = useState<boolean>(false);
   const [openUser, setOpenUser] = useState<Analyst>();
   const [error, setError] = useState<number | null>(null);
   const titles = ["Nome", "Email", "Departamento", "Filial", "Mais informações"];
@@ -52,17 +51,18 @@ function TransferServices() {
     const getUsersData = new GetUsersData(
       dispatch,
       auth.userId as number,
-      setLoading,
+      setUpdated,
       setError
     );
     getUsersRequisition(getUsersData);
   }
 
   useEffect(() => {
-    if(usersLines.length > 0 && loading) {
+    if(usersLines.length > 0 && loading && updated) {
+      setUpdated(false);
       setLoading(false);
     }
-  }, [usersLines, loading])
+  }, [usersLines])
 
   return (
     <section>

@@ -7,10 +7,10 @@ import { Line } from "Components/Table/utils/classes";
 import { useAuth } from "Hooks/useAuth/use_auth";
 import { useAppDispatch, useAppSelector } from "Hooks/useRedux/use_redux";
 import { Analyst } from "Models/analyst";
-import { analystTypes } from "Pages/RegisterUsers/utils/data";
 import { GetUsersData } from "Pages/Users/utils/classes";
 import { getUsersRequisition } from "Pages/Users/utils/requisitions";
 import { FormEvent, useEffect, useState } from "react";
+import { findCurAnalystType } from "Utils/datas";
 import ShowUserServices from "./ShowUserServices/show_user_services";
 import styles from "./transfer_service.module.scss";
 
@@ -32,7 +32,7 @@ function TransferServices() {
       user.phone,
       user.email,
       "",
-      analystTypes.find(type => type.label === user.department)?.value,
+      findCurAnalystType(user.department),
       user.cpf,
       user.id
     )))

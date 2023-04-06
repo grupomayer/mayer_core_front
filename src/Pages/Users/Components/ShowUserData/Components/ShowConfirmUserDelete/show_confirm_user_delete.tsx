@@ -18,26 +18,30 @@ function ShowConfirmUserDelete({ analystId, onClose }: IShowConfirmUserDelete) {
   const dispatch = useAppDispatch();
   const users = useAppSelector(state => state.users);
   const [loading, setLoading] = useState<boolean>(false);
+  const [deleted, setDeleted] = useState<boolean>(false);
   const [error, setError] = useState<number | null>(null);
   const auth = useAuth();
 
   function deleteUser() {
+    setLoading(true);
     const deleteUserData = new DeleteUserData(
       dispatch,
       analystId,
       auth.userId as number,
-      setLoading,
+      setDeleted,
       setError
     );
     deleteUserRequisition(deleteUserData)
   }
 
   useEffect(() => {
-    if(loading && users.length > 0) {
+    if(deleted) {
       alert("Usuário deletado com sucesso!");
+      setDeleted(false);
+      setLoading(false);
       onClose();
     }
-  }, [users, loading]);
+  }, [deleted, users]);
 
   useEffect(() => {
     if(error) {

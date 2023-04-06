@@ -5,7 +5,7 @@ import styles from "./show_user_data.module.scss";
 import { DefaultInputData } from "Components/Inputs/DefaultInput/utils/classes";
 import { Analyst } from "Models/analyst";
 import { FormEvent, useState } from "react";
-import { branchs, departments } from "Utils/datas";
+import { branchs, departments, findCurAnalystType } from "Utils/datas";
 import userImg from "Images/user.png";
 import ShowUserPermissions from "./Components/ShowUserPermissions/show_user_permissions";
 import { PutUserData } from "./utils/classes";
@@ -13,7 +13,6 @@ import { useAppDispatch } from "Hooks/useRedux/use_redux";
 import { putUserRequisition } from "./utils/requisitions";
 import ShowConfirmUserDelete from "./Components/ShowConfirmUserDelete/show_confirm_user_delete";
 import { UserDTO } from "DTO/UserDTO";
-import { analystTypes } from "Pages/RegisterUsers/utils/data";
 import ShowLoading from "Components/Modals/ShowLoading/show_loading";
 import ShowError from "Components/Modals/ShowError/show_error";
 
@@ -30,7 +29,7 @@ function ShowUserData({ onClose, user }: IShowUserData) {
     user.phone,
     user.email,
     "",
-    analystTypes.find(type => type.label === user.department)?.value,
+    findCurAnalystType(user.department),
     user.cpf,
     user.id  
   );
@@ -78,6 +77,11 @@ function ShowUserData({ onClose, user }: IShowUserData) {
     putUserRequisition(putUserData);
   }
 
+  function onCloseDelete() {
+    setShowDelete(false);
+    onClose();
+  }
+
   return (
     <DefaultModal
       onClose={onClose}
@@ -116,7 +120,7 @@ function ShowUserData({ onClose, user }: IShowUserData) {
         ))}
         <DefaultButton label="Atualizar" type="submit" />
       </form>
-      {showDelete && <ShowConfirmUserDelete analystId={analyst.id as number} onClose={() => setShowDelete(false)} />}
+      {showDelete && <ShowConfirmUserDelete analystId={analyst.id as number} onClose={onCloseDelete} />}
       {openPermissions && <ShowUserPermissions user={user} onClose={() => setOpenPermissions(false)} />}
       <ShowLoading loading={loading} />
       <ShowError error={error} page="ShowUserData" setError={setError} />

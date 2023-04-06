@@ -25,6 +25,7 @@ function TransferServiceMenu({ analyst, service, onClose }: ITransferServiceMenu
   const [loadingTransfer, setLoadingTransfer] = useState<boolean>(false);
   const [error, setError] = useState<number | null>(null);
   const [selectedAnalystId, setSelectedAnalystId] = useState<number>();
+  const [principalAnalyst, setPrincipalAnalyst] = useState<boolean>(false);
 
   const analysts = useAppSelector(state => [
     new SelectDataClass("", "selecione um analista..."),
@@ -62,7 +63,7 @@ function TransferServiceMenu({ analyst, service, onClose }: ITransferServiceMenu
       dispatch,
       auth.userId as number,
       service.id,
-      analyst.id as number,
+      principalAnalyst ? selectedAnalystId as number : analyst.id as number,
       selectedAnalystId as number,
       setLoadingTransfer,
       setError
@@ -86,6 +87,15 @@ function TransferServiceMenu({ analyst, service, onClose }: ITransferServiceMenu
           onChange={setSelectedAnalystId}
           value={selectedAnalystId}
           data={analysts}
+        />
+        <DefaultInput
+          id="analyst_principal"
+          label="Analista principal"
+          placeholder="Analista principal"
+          title="Marcado como analista principal, fará com que o analista que criou esse serviço não consiga mais acompanhar o serviço transferido."
+          type="checkbox"
+          onChange={setPrincipalAnalyst}
+          value={principalAnalyst}
         />
         <DefaultButton label="Transferir" type="submit" />
       </form>

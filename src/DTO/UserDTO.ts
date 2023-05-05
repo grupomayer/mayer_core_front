@@ -20,6 +20,8 @@ export class UserDTO {
         public readonly is_wealth_management: boolean,
         public readonly is_analyst: boolean,
         public readonly is_superuser: boolean,
-        public readonly is_admin: boolean
+        public readonly is_admin: boolean,
+        public readonly is_audit: boolean,
+        public readonly is_validator: boolean
     ) {}
 }

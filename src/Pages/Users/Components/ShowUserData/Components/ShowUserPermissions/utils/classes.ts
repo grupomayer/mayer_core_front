@@ -27,6 +27,8 @@ export class PermissionsData {
         public readonly isRegisterCorporate: boolean,
         public readonly isSuperUser: boolean,
         public readonly isAvcb: boolean,
+        public readonly isAudit: boolean,
+        public readonly isValidator: boolean,
         public readonly adminId: number,
     ) {}
 }

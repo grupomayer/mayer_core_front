@@ -90,6 +90,8 @@ export function putUserPermissionsThunk({ permissions, setError, setLoading }: P
                 "is_register_corporate": permissions.isRegisterCorporate,
                 "is_superuser": permissions.isSuperUser,
                 "is_avcb": permissions.isAvcb,
+                "is_audit": permissions.isAudit,
+                "is_validator": permissions.isValidator,
                 "admin_id": permissions.adminId
             })
                 .then(() => {

@@ -37,6 +37,8 @@ function ShowUserPermissions({ onClose, user }: IShowUserPermissions) {
   const [isLicensing, setIsLicensing] = useState<boolean>(user.is_licensing);
   const [isWealthManagement, setIsWealthManagement] = useState<boolean>(user.is_wealth_management);
   const [isRegisterCorporate, setIsRegisterCorporate] = useState<boolean>(user.is_register_corporate);
+  const [isAudit, setIsAudit] = useState<boolean>(user.is_audit);
+  const [isValidator, setIsValidator] = useState<boolean>(user.is_validator);
   const [isAvcb, setIsAvcb] = useState<boolean>(user.is_avcb);
 
   const permissionsInputs = [
@@ -54,6 +56,8 @@ function ShowUserPermissions({ onClose, user }: IShowUserPermissions) {
     new DefaultInputData(isWealthManagement, setIsWealthManagement, "is_wealth_management", "checkbox", "Gestão Patrimonial", "Gestão Patrimonial,", "Gestão Patrimonial", undefined, false),
     new DefaultInputData(isRegisterCorporate, setIsRegisterCorporate, "is_register_corporate", "checkbox", "Registrário", "Registrário", "Registrário", undefined, false),
     new DefaultInputData(isAvcb, setIsAvcb, "is_avcb", "checkbox", "AVCB", "AVCB", "AVCB", undefined, false),
+    new DefaultInputData(isAudit, setIsAudit, "is_audit", "checkbox", "Auditoria", "Auditoria", "Auditoria", undefined, false),
+    new DefaultInputData(isValidator, setIsValidator, "is_validator", "checkbox", "Validador", "Validador", "Validador", undefined, false),
   ];
 
   function onFormSubmit(e: FormEvent<HTMLFormElement>) {
@@ -75,6 +79,8 @@ function ShowUserPermissions({ onClose, user }: IShowUserPermissions) {
       isRegisterCorporate,
       isSuperUser,
       isAvcb,
+      isAudit,
+      isValidator,
       auth.userId as number,
     );
     const putPermissionsData = new PutPermissionsData(

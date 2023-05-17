@@ -3,9 +3,9 @@ import { putTransferServiceThunk } from "Store/Modules/Services/thunk";
 import { GetDepartmentAnalystsData, PutTransferServiceData } from "./classes";
 
 export function getDepartmentAnalystsRequisition(data: GetDepartmentAnalystsData) {
-    data.dispatch(getDepartmentAnalystsThunk(data));
+    getDepartmentAnalystsThunk(data);
 }
 
 export function putTransferServiceRequisition(data: PutTransferServiceData) {
-    data.dispatch(putTransferServiceThunk(data));
+    putTransferServiceThunk(data);
 }

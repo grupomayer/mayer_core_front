@@ -15,7 +15,7 @@
             top: 80px;
             left: 20px;
             width: 150px;
-            img {
+            .logo {
                 width: 150px;
             }
         }
@@ -52,5 +52,8 @@
         width: 50%;
         display: flex;
         justify-content: center;
+        .logo {
+            width: 90%;
+        }
     }
 }

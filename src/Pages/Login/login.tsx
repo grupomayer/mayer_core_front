@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from "Hooks/useRedux/use_redux";
 import ShowLoading from "Components/Modals/ShowLoading/show_loading";
 import ShowError from "Components/Modals/ShowError/show_error";
 import { useAuth } from "Hooks/useAuth/use_auth";
-import logoImg from "Images/logo_mayer.png";
+import logoImg from "Images/mayer_tech.png";
 
 function Login() {
 
@@ -95,6 +95,7 @@ function Login() {
         <img
           src={logoImg}
           alt="Logo da empresa Grupo Mayer, em branco"
+          className={styles.logo}
         />
       </div>
       <ShowLoading loading={loading} />

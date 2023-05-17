@@ -20,7 +20,9 @@ function AuthWrapper() {
     while ((new Date()).getTime() < a) {
       if (req) {
         req = false;
-        httpCore.post(`/logout/${auth.userId}/`);
+        httpCore.post(`/logout/${auth.userId}/`)
+          .then(() => navigate("/"))
+          .catch(() => navigate("/"));
       }
     }
   }
